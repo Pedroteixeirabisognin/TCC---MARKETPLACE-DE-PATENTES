@@ -1,9 +1,14 @@
+<?php
+	//IF TERNARIO (SE CONDIÇÃO VERDADEIRA EXECUTE A ESQUERDA DOS ":" SE FOR FALSA EXECUTE A DIREITA)
+	$erro = isset($_GET['erro'])? $_GET['erro']:0;
+
+?>
 <!DOCTYPE HTML>
 <html lang="pt-br">
 	<head>
 		<meta charset="UTF-8">
 
-		<title>Twitter clone</title>
+		<title>Invector</title>
 
 		<!-- jquery - link cdn -->
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -34,7 +39,8 @@
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
 	            <li><a href="inscrevase.php">Inscrever-se</a></li>
-	            <li class="">
+	            <!--IF TERNARIO PARA MUDAR A CLASSE CASO TENHA UM ERRO-->
+	            <li class="<?= $erro == 1 ? 'open' : '' ?>">
 	            	<a id="entrar" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Entrar</a>
 					<ul class="dropdown-menu" aria-labelledby="entrar">
 						<div class="col-md-12">
@@ -54,6 +60,15 @@
 								<br /><br />
 								
 							</form>
+							<?php
+								//VERIFICA SE SESSION RETORNOU UM ERRO
+								if ($erro == 1) {
+									echo ' <font color="#FF0000">Usuario e/ou senha inválido(s)</font>';
+								}
+
+
+
+							?>
 						</form>
 				  	</ul>
 	            </li>
