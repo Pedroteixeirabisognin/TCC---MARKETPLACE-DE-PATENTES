@@ -24,6 +24,28 @@
 		<!-- bootstrap - link cdn -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	
+		<script type="text/javascript">
+			
+			$(document).ready(function(){
+
+				//ASSOCIAR O EVENTO DE CLICK AO BOTÃO
+				$('#btn_pesquisa').click( function(){
+
+
+
+					if ($('#text_pesquisa').val().length > 0){
+
+						alert ('Campo preenchido');
+
+					}
+
+				})
+
+
+			})
+
+		</script>
+
 	</head>
 
 	<body>
@@ -52,24 +74,45 @@
 
 	    <div class="container">
 	    	
-	    	<br /><br />
+	    	<div class="col-md-3">
+	    		<div class="panel panel-default">
+					<div class="panel-body">
+												
+					<h4>Bem vindo!</h4>
+					<h4><?= $_SESSION['usuario']?></h4>
+					</div>	    			
+	    		</div>	
+	    	</div>
+	    	<div class="col-md-6">
+	    		<div class="panel panel-default">
+	    			<div class="panel-body">
+	    				<div class="input-group">
+	    					<input type="text" class="form-control" id="text_pesquisa" placeholder="Pesquise" maxlength="140" name="">
+	    					<span class="input-group-btn">
+	    						
+	    						<button class="btn btn-default" id="btn_pesquisa" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+								</button>
 
-	    	<div class="col-md-4"></div>
-	    	<div class="col-md-4">
-	    	
-	    	Usuario autenticado
-	    	<br />
-	    	<?= $_SESSION['usuario'] ?>
-	    	<br />
-	    	<?= $_SESSION['email'] ?>
+	    					</span>
+	    				</div>
+
+	    			</div>
+	    		</div>
 			</div>
-			<div class="col-md-4"></div>
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						
+						<h4><a href="#">Procurar por pessoas</a></h4>
 
-			<div class="clearfix"></div>
-			<br />
-			<div class="col-md-4"></div>
-			<div class="col-md-4"></div>
-			<div class="col-md-4"></div>
+					</div>
+
+				</div>
+
+
+			</div>
+
+
 
 		</div>
 
