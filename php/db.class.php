@@ -3,7 +3,7 @@
 /**
 * 
 */
-class bd{
+class db{
 		
 		//HOST
 		private $host = 'localhost';
@@ -20,7 +20,7 @@ class bd{
 
 
 			//CRIAR A CONEXAO
-			$con = mysqli_connect(this->host, this->usuario, this->senha, this->database);
+			$con = mysqli_connect($this->host,$this->usuario, $this->senha,$this->database);
 
 			//AJUSTA O CHARSET DE COMUNICAÇÃO ENTRE A APLICAÇÃO E O BANCO DE DADOS
 			mysqli_set_charset($con, 'utf8');
