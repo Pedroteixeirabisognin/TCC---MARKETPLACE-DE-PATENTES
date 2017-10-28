@@ -1,8 +1,14 @@
 <?php
 	//IF TERNARIO (SE CONDIÇÃO VERDADEIRA EXECUTE A ESQUERDA DOS ":" SE FOR FALSA EXECUTE A DIREITA)
+	
+	session_start();
 	$erro = isset($_GET['erro'])? $_GET['erro']:0;
+	//SE O USUÁRIO JÁ ESTIVER LOGADO VAI RETORNAR PARA HOME.PHP
+	if(isset($_SESSION['usuario'])){
 
+		header('Location: home.php');
 
+	}
 
 ?>
 <!DOCTYPE HTML>
