@@ -1,4 +1,7 @@
 <?php
+	
+	//INICIA UMA SESSION
+	session_start();
 
 	//CHAMA A CLASSE BD.CLASS
 	require_once('db.class.php');
@@ -23,7 +26,9 @@
 		//TESTA SE O $DADOS_USUARIO POSSUI DADOS VÁLIDOS
 		if(isset($dados_usuario['usuario'])){
 
-			echo "Usuario existe!";
+			$_SESSION['usuario'] = $dados_usuario['usuario'];
+			$_SESSION['email'] = $dados_usuario['email'];
+			header('Location: ../home.php');
 
 		}else{
 

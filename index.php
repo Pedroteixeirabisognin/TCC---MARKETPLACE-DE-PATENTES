@@ -2,6 +2,8 @@
 	//IF TERNARIO (SE CONDIÇÃO VERDADEIRA EXECUTE A ESQUERDA DOS ":" SE FOR FALSA EXECUTE A DIREITA)
 	$erro = isset($_GET['erro'])? $_GET['erro']:0;
 
+
+
 ?>
 <!DOCTYPE HTML>
 <html lang="pt-br">
@@ -26,11 +28,11 @@
 					var campo_vazio = false;
 					//VERIFICA SE OS CAMPOS ESTÃO VAZIOS
 					if($('#campo_usuario').val() == ''){
-
+						//MUDA O ATRIBUTO CSS FAZENDO QUE A BORDA FIQUE VERMELHA
 						$('#campo_usuario').css({'border-color': '#A94442'}); 
 						campo_vazio = true;
 					}else{
-
+						//MUDA O ATRIBUTO CSS FAZENDO QUE A BORDA FIQUE CINZA
 						$('#campo_usuario').css({'border-color': '#CCC'}); 						
 
 					}
