@@ -84,20 +84,53 @@
 	    		</div>	
 	    	</div>
 	    	<div class="col-md-6">
-	    		<div class="panel panel-default">
-	    			<div class="panel-body">
-	    				<div class="input-group">
-	    					<input type="text" class="form-control" id="text_pesquisa" placeholder="Pesquise" maxlength="140" name="">
-	    					<span class="input-group-btn">
-	    						
-	    						<button class="btn btn-default" id="btn_pesquisa" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-								</button>
+	    		<form action="php/pesquisa_anuncio.php">
+		    		<div class="panel panel-default">
+		    			<div class="panel-body">
+		    				<div class="input-group">
+		    					
 
-	    					</span>
-	    				</div>
+		    					<!--MODIFICANDO PARA PESQUISAR ANUNCIOS EM PESQUISA_ANUNCIO.PHP, COLOQUEI NOME INPUT_PESQUISA-->
+		    					<input type="text" class="form-control" id="text_pesquisa" placeholder="Pesquise" maxlength="140" name="input_pesquisa">
+		    					<span class="input-group-btn">
+		    						
+		    						<button class="btn btn-default" id="btn_pesquisa" type="submit" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+									</button>
 
-	    			</div>
-	    		</div>
+		    					</span>
+		    				</div>
+
+		    			</div>
+		    		</div>
+	    		</form>
+
+	    		<!--EM TESTE-->
+	    		<?php 
+
+					foreach ($_SESSION as $anuncio) {
+
+						if($_SESSION['usuario']){
+						echo " 	<div class='panel panel-default>
+						<div class='panel-heading'>
+							<!--AQUI SERÁ INSERIDO A SESSION T-->
+							<h3 class='panel-title'>".$anuncio['titulo']."</h3>
+						</div>
+						<div class='panel-body'>"
+							.$anuncio['descricao']. 
+							"</div>
+						</div>";
+
+
+
+						var_dump($anuncio);
+						echo "<br/>";
+						echo "<br/>";
+						}
+					}	    			
+
+
+	    		?>
+
 			</div>
 			<div class="col-md-3">
 				<div class="panel panel-default">
