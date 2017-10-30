@@ -30,10 +30,8 @@
 			//$dados_anuncio[] = $linha;
 		}
 
-		//EM TESTE
-		header('Location: ../home.php');
 
-		/*foreach ($dados_anuncio as $anuncio) {
+		foreach ($dados_anuncio as $anuncio) {
 
 
 			echo "<div class='panel panel-default'>
@@ -51,7 +49,7 @@
 			var_dump($anuncio);
 			echo "<br/>";
 			echo "<br/>";
-		}*/
+		}
 
 
 	}else{
