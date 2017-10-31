@@ -11,19 +11,46 @@
 
 
 	//CHAMA A CLASSE BD.CLASS
-	require_once('db.class.php');
+	require_once('php/db.class.php');
 
-	$pesquisa = $_GET['input_pesquisa'];
+	//DEFINE O NUMERO DE ITENS POR PÁGINA
+	$itens_por_pagina = 10; 
+
+
+	//PEGAR A PAGINA ATUAL
+	$pagina = intval($_GET['pagina']);
+
+
+	$pesquisa = isset($_GET['input_pesquisa']) ? $_GET['input_pesquisa'] : 0;
 
 	$objDb = new db();
 
 	$link = $objDb->conecta_mysql();
 
 
- 	$sql = "SELECT * FROM `anuncio_patente` where (`id` LIKE '%carro%') or (`id_usuario` LIKE '%$pesquisa%') or (`titulo` LIKE '%$pesquisa%') or (`descricao` LIKE '%$pesquisa%') or (`telefone` LIKE '%$pesquisa%') or (`email_usuario` LIKE '%$pesquisa%') or (`data_inclusao` LIKE '%$pesquisa%')";
+
+ 	if ($pesquisa) {
+ 	 	$sql = "SELECT * FROM `anuncio_patente` where (`id` LIKE '%carro%') or (`id_usuario` LIKE '%$pesquisa%') or (`titulo` LIKE '%$pesquisa%') or (`descricao` LIKE '%$pesquisa%') or (`telefone` LIKE '%$pesquisa%') or (`email_usuario` LIKE '%$pesquisa%') or (`data_inclusao` LIKE '%$pesquisa%') LIMIT $pagina, $itens_por_pagina";	
+
+
+ 	}
+ 	else{
+	 	$sql = "SELECT * FROM `anuncio_patente` LIMIT $pagina, $itens_por_pagina";
+	 }
+	
+	$execute = mysqli_query($link,$sql);
+	$anuncio = $execute->fetch_assoc();
+	$num = $execute->num_rows;
+
+
+	//Pega A QUANTIDADE TOTAL DE OBJETOS NO BANCO DE DADOS
+	$num_total = $link->query("SELECT * FROM `anuncio_patente`")->num_rows;
+
+	//DEFINIR O NUMERO DE PAGINAS
+	$num_paginas = ceil($num_total/$itens_por_pagina);
 
 	//EM UMA QUERY DE SELECT ELE RETORNA FALSE OU UM RESOURCE QUE É UMA REFERENCIA A UMA INFORMAÇÃO EXTERNA AO PHP, É COM ELE QUE RECUPERAMOS OS DADOS
-	$resultado_id = mysqli_query($link,$sql);
+	/*$resultado_id = mysqli_query($link,$sql);
 
 	//TESTA SE A CONSULTA ESTÁ SENDO FEITA CORRETAMENTE
 	if($resultado_id){
@@ -42,7 +69,7 @@
 		}
 
 
-		foreach ($dados_anuncio as $anuncio) {
+		/*foreach ($dados_anuncio as $anuncio) {
 
 
 			echo "<div class='panel panel-default'>
@@ -64,7 +91,7 @@
 		echo "Erro na execução da consulta, favor entrar em contato com o admin da empresa!";
 
 	}
-
+*/
 
 ?>
 
@@ -162,7 +189,68 @@
 	    		</form>
 
 	    		<!--EM TESTE-->
+	    		<div class="container fluid">
+	    			<div class="row">
+	    				<div class="col-lg-4">
+	    					
+	    				<h1>Titulo</h1>
+	    				<?php if($num > 0 ){?>
+	    					<table class="table table-bordered table-hover">
+	    				
+	    						<thead>
+	    							<tr>
+	    								
+	    							<td>Titulo</td>
+	    							<td>Descrição</td>
 
+	    							</tr>
+
+
+	    						</thead>
+	    						<tbody>
+	    							<?php do{ ?>
+	    							<tr>
+	    								<td><?php echo $anuncio['titulo'];?></td>
+	    								<td><?php echo $anuncio['descricao'];?></td>
+
+	    							</tr>
+	    							<?php }while($anuncio = $execute->fetch_assoc()); ?>
+
+	    						</tbody>
+
+	    					</table>
+							<nav aria-label="Page navigation">
+							  <ul class="pagination">
+							    <li>
+							      <a href="home.php?pagina=0" aria-label="Previous">
+							        <span aria-hidden="true">&laquo;</span>
+							      </a>
+							    </li>
+							    <?php for($i=0;$i<$num_paginas;$i++){ ?>
+							    	<?php $estilo = "";
+							    	 if($pagina == $i){
+							    		
+							    		$estilo= "class='\active\'";
+
+							    	 } ?>
+							    	<li <?php echo $estilo; ?>><a href="home.php?pagina=<?php echo $i;?>"><?php echo $i+1; ?></a></li>
+							    	
+							    <?php } ?>
+							    <li>
+							      <a href="home.php?pagina=<?php echo $num_paginas-1;?>" aria-label="Next">
+							        <span aria-hidden="true">&raquo;</span>
+							      </a>
+							    </li>
+							  </ul>
+							</nav>
+	    					<?php }?>		
+	    				</div>
+
+
+	    			</div>
+
+
+	    		</div>
 
 			</div>
 			<div class="col-md-3">

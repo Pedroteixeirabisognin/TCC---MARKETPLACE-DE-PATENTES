@@ -43,10 +43,6 @@
 				  	 .$anuncio['descricao']. 
 				  "</div>
 				</div>";
-
-
-
-			var_dump($anuncio);
 			echo "<br/>";
 			echo "<br/>";
 		}
