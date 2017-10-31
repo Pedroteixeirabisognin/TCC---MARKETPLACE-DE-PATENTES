@@ -49,49 +49,7 @@
 	//DEFINIR O NUMERO DE PAGINAS
 	$num_paginas = ceil($num_total/$itens_por_pagina);
 
-	//EM UMA QUERY DE SELECT ELE RETORNA FALSE OU UM RESOURCE QUE É UMA REFERENCIA A UMA INFORMAÇÃO EXTERNA AO PHP, É COM ELE QUE RECUPERAMOS OS DADOS
-	/*$resultado_id = mysqli_query($link,$sql);
 
-	//TESTA SE A CONSULTA ESTÁ SENDO FEITA CORRETAMENTE
-	if($resultado_id){
-
-		//A FUNÇÃO MYSQLI_FETCH_ARRAY RETORNA DE FORMA NUMÉRICA E PELO NOME, COLOCANDO O SEGUNDO PARAMETRO MYSQLI_NUM ELA SÓ RETORNARÁ A FORMA NUMÉRICA, MYSQLI_ASSOC RETORNA PELO NOME
-		$dados_anuncio = array();
-
-
-		//ENQUANTO LINHA RECEBER UM ARRAY
-		while($linha = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC)){
-
-			//ISSO FUNCIONA COMO UM MALLOC EM C AUTOMATICAMENTE PELO QUE ENTENDI, ELE VAI INSERIR UM ARRAY DENTRO DE UM INDICE DE DADOS_USUARIO
-			$_SESSION[] = $linha;
-
-			//$dados_anuncio[] = $linha;
-		}
-
-
-		/*foreach ($dados_anuncio as $anuncio) {
-
-
-			echo "<div class='panel panel-default'>
-				  	<div class='panel-heading'>
-				  		<!--AQUI SERÁ INSERIDO A SESSION T-->
-				    	<h3 class='panel-title'>".$anuncio['titulo']."</h3>
-				  	</div>
-				  <div class='panel-body'>"
-				  	 .$anuncio['descricao']. 
-				  "</div>
-				</div>";
-			echo "<br/>";
-			echo "<br/>";
-		}
-
-
-	}else{
-
-		echo "Erro na execução da consulta, favor entrar em contato com o admin da empresa!";
-
-	}
-*/
 
 ?>
 
@@ -193,28 +151,19 @@
 	    			<div class="row">
 	    				<div class="col-lg-4">
 	    					
-	    				<h1>Titulo</h1>
+	    				
 	    				<?php if($num > 0 ){?>
 	    					<table class="table table-bordered table-hover">
-	    				
-	    						<thead>
-	    							<tr>
-	    								
-	    							<td>Titulo</td>
-	    							<td>Descrição</td>
+	    					    <?php do{ ?>
+									<div class="panel panel-default">
+									  <div class="panel-heading"><?php echo $anuncio['titulo'];?></div>
+									  <div class="panel-body">
+									    <?php echo $anuncio['descricao'];?>
+									  </div>
+									</div>
 
-	    							</tr>
 
-
-	    						</thead>
-	    						<tbody>
-	    							<?php do{ ?>
-	    							<tr>
-	    								<td><?php echo $anuncio['titulo'];?></td>
-	    								<td><?php echo $anuncio['descricao'];?></td>
-
-	    							</tr>
-	    							<?php }while($anuncio = $execute->fetch_assoc()); ?>
+	    						<?php }while($anuncio = $execute->fetch_assoc()); ?>
 
 	    						</tbody>
 
@@ -226,13 +175,17 @@
 							        <span aria-hidden="true">&laquo;</span>
 							      </a>
 							    </li>
+							    <!--FAZ A PAGINA MUDAR-->
 							    <?php for($i=0;$i<$num_paginas;$i++){ ?>
+							    	
+							    	<!--FAZ O ESTILO DO PAGINATION MUDAR DEPENDENDO DA PAGINA-->
 							    	<?php $estilo = "";
 							    	 if($pagina == $i){
 							    		
-							    		$estilo= "class='\active\'";
+							    		$estilo= "class='active'";
 
-							    	 } ?>
+							    	 }
+							    	  ?>
 							    	<li <?php echo $estilo; ?>><a href="home.php?pagina=<?php echo $i;?>"><?php echo $i+1; ?></a></li>
 							    	
 							    <?php } ?>
