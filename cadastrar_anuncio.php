@@ -1,7 +1,54 @@
 <?php
-	//ISSET VERIFICA SE EXISTE ALGO DENTRO DA VARIÁVEL
-	$erro_usuario = isset($_GET['erro_usuario'])? $_GET['erro_usuario'] : 0;
-	$erro_email	=  isset($_GET['erro_email'])? $_GET['erro_email'] : 0;
+	
+	//SE O USUÁRIO NÃO PASSAR PELA AUTENTIFICAÇAO RETORNARÁ AO INDEX.PHP
+	if(!isset($_GET['usuario'])){
+
+		header('Location: index.php?erro=1');
+
+	}
+	//CHAMA A CLASSE BD.CLASS
+	require_once('php/db.class.php');
+
+	 //VIA POST OS DADOS NÃO FICAM EXPOSTOS NA URL, VIA GET SIM
+
+
+	 $usuario = isset( $_GET['usuario'])? $_GET['usuario'] : 0; 
+	 $titulo = isset( $_POST['titulo'])? $_POST['titulo'] : 0; 
+	 $telefone = isset( $_POST['telefone'])? $_POST['telefone'] : 0; 
+	 $registro = isset( $_POST['registro'])? $_POST['registro'] : 0; 
+	 $descricao = isset( $_POST['descricao'])? $_POST['descricao'] : 0; 
+	 $imagem = isset( $_POST['imagem'])? $_POST['imagem'] : 0; 
+
+
+if($usuario != 0 and $titulo != 0 and $telefone != 0 and $registro != 0 and $descricao != 0 and $imagem != 0){
+	 
+	$objDb = new db();
+
+	$link = $objDb->conecta_mysql();
+
+	$sql = "SELECT id FROM usuarios WHERE usuario = '$usuario'";
+	$execute = mysqli_query($link,$sql);
+	$dados_usuario = mysqli_fetch_array($resultado_id);
+	$id = $dados_usuario['id_usuario'];
+
+
+
+	 // QUERY SQL (NOTA: QUANDO SE UTILIZA ASPAS DUPLAS " O PHP JÁ TENTA ENCONTRAR ALGUMA VARIÁVEL NO MEIO E TENTA ATRIBUIR O VALOR REFERENTE A ELA AO EXECUTAR A STRING)
+	 $sql = "INSERT INTO `anuncio_patente`(`id_usuario`, `titulo`, `descricao`, `telefone`, `registro`, `data_inclusao`, `imagem`) VALUES ('$id','$titulo','$descricao','$telefone','$registro',CURRENT_TIMESTAMP,'$imagem')";
+
+	 //EXECUTAR A QUERY (NOTA: A FUNÇÃO MYSQLI_QUERY QUANDO DA ERRO RETORNA VALOR FALSE)
+	 if(mysqli_query($link,$sql)){
+
+	 	echo "Anuncio registrado com sucesso!";
+
+	 }else{
+
+	 	echo "Erro ao cadastrar o Anuncio";
+
+	 }
+}
+
+
 ?>
 
 
@@ -54,7 +101,7 @@
 	    		<br />
 
 	    		<!--FORM PARA CADASTRO DO ANUNCIO-->
-					<form>
+					<form action="cadastrar_anuncio.php">
 					  <div class="form-group">
 					    <label for="titulo">Título</label>
 					    <input type="text" class="form-control" id="titulo" placeholder="Insira um título..." required>
@@ -64,8 +111,8 @@
 					    <input type="tel" pattern="^\d{2} \d{5} \d{4}$" class="form-control" id="telefone" placeholder="Ex: xx xxxxx xxxx" required>
 					  </div>
 					  <div class="form-group">
-					    <label for="titulo">Numero do registro</label>
-					    <input type="text" class="form-control" id="titulo" placeholder="Insira o número do registro..." required>
+					    <label for="registro">Numero do registro</label>
+					    <input type="text" class="form-control" id="registro" placeholder="Ex: BRXXXXXXXXX" required>
 					  </div>
 					  <div class="form-group">
 					    <label for="descricao">Descrição</label>
@@ -73,8 +120,8 @@
 					  </div>
 					  <div class="form-group">
 					    <label for="imagem">Foto</label>
-					    <input type="file" id="imagem">
-					    <p class="help-block">Insira uma imagem do anuncio aqui!</p>
+					    <input type="url" id="imagem">
+					    <p class="help-block">Insira a url da imagem do seu anuncio no imgur aqui!</p>
 					  </div>
 					  <div class="checkbox">
 					    <label>

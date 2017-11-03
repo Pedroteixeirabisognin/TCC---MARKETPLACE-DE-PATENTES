@@ -8,7 +8,10 @@ if(!isset($_SESSION['usuario'])){
 	header('Location: index.php?erro=1');
 
 }
+else{
+	$usuario=$_SESSION['usuario'];
 
+}
 
 //CHAMA A CLASSE BD.CLASS
 require_once('php/db.class.php');
@@ -205,7 +208,7 @@ $num_paginas = ceil($num_total/$itens_por_pagina);
 			<div class="panel panel-default">
 				<div class="panel-body">
 
-					<h4><a href="cadastrar_anuncio.php">Cadastrar Anuncio</a></h4>
+					<h4><a href="cadastrar_anuncio.php?usuario=<?php echo $usuario;?>">Cadastrar Anuncio</a></h4>
 
 				</div>
 
