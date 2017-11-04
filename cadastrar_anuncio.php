@@ -1,54 +1,14 @@
 <?php
 	
-	//SE O USUÁRIO NÃO PASSAR PELA AUTENTIFICAÇAO RETORNARÁ AO INDEX.PHP
-	if(!isset($_GET['usuario'])){
+	session_start();
+	if(!isset($_SESSION['usuario'])){
 
 		header('Location: index.php?erro=1');
 
-	}
-	//CHAMA A CLASSE BD.CLASS
-	require_once('php/db.class.php');
+	}	
 
-	 //VIA POST OS DADOS NÃO FICAM EXPOSTOS NA URL, VIA GET SIM
-
-
-	 $usuario = isset( $_GET['usuario'])? $_GET['usuario'] : 0; 
-	 $titulo = isset( $_POST['titulo'])? $_POST['titulo'] : 0; 
-	 $telefone = isset( $_POST['telefone'])? $_POST['telefone'] : 0; 
-	 $registro = isset( $_POST['registro'])? $_POST['registro'] : 0; 
-	 $descricao = isset( $_POST['descricao'])? $_POST['descricao'] : 0; 
-	 $imagem = isset( $_POST['imagem'])? $_POST['imagem'] : 0; 
-
-
-if($usuario != 0 and $titulo != 0 and $telefone != 0 and $registro != 0 and $descricao != 0 and $imagem != 0){
-	 
-	$objDb = new db();
-
-	$link = $objDb->conecta_mysql();
-
-	$sql = "SELECT id FROM usuarios WHERE usuario = '$usuario'";
-	$execute = mysqli_query($link,$sql);
-	$dados_usuario = mysqli_fetch_array($resultado_id);
-	$id = $dados_usuario['id_usuario'];
-
-
-
-	 // QUERY SQL (NOTA: QUANDO SE UTILIZA ASPAS DUPLAS " O PHP JÁ TENTA ENCONTRAR ALGUMA VARIÁVEL NO MEIO E TENTA ATRIBUIR O VALOR REFERENTE A ELA AO EXECUTAR A STRING)
-	 $sql = "INSERT INTO `anuncio_patente`(`id_usuario`, `titulo`, `descricao`, `telefone`, `registro`, `data_inclusao`, `imagem`) VALUES ('$id','$titulo','$descricao','$telefone','$registro',CURRENT_TIMESTAMP,'$imagem')";
-
-	 //EXECUTAR A QUERY (NOTA: A FUNÇÃO MYSQLI_QUERY QUANDO DA ERRO RETORNA VALOR FALSE)
-	 if(mysqli_query($link,$sql)){
-
-	 	echo "Anuncio registrado com sucesso!";
-
-	 }else{
-
-	 	echo "Erro ao cadastrar o Anuncio";
-
-	 }
-}
-
-
+	//VARIAVEL PARA VERIFICAR SE O CADASTRO FOI OK
+	$cadastro = intval(isset($_SESSION['cadastro']) ? $_SESSION['cadastro'] : 0) ;
 ?>
 
 
@@ -101,26 +61,26 @@ if($usuario != 0 and $titulo != 0 and $telefone != 0 and $registro != 0 and $des
 	    		<br />
 
 	    		<!--FORM PARA CADASTRO DO ANUNCIO-->
-					<form action="cadastrar_anuncio.php">
+					<form action="php/cadastrar_anuncio.php" id="form_anuncio" method="POST">
 					  <div class="form-group">
 					    <label for="titulo">Título</label>
-					    <input type="text" class="form-control" id="titulo" placeholder="Insira um título..." required>
+					    <input type="text" class="form-control" id="titulo_id" name="titulo" placeholder="Insira um título..." required>
 					  </div>
 					  <div class="form-group">
 					    <label for="telefone">Telefone</label>
-					    <input type="tel" pattern="^\d{2} \d{5} \d{4}$" class="form-control" id="telefone" placeholder="Ex: xx xxxxx xxxx" required>
+					    <input type="tel" pattern="^\d{2} \d{5} \d{4}$" class="form-control" name="telefone" id="telefone_id" placeholder="Ex: xx xxxxx xxxx" required>
 					  </div>
 					  <div class="form-group">
 					    <label for="registro">Numero do registro</label>
-					    <input type="text" class="form-control" id="registro" placeholder="Ex: BRXXXXXXXXX" required>
+					    <input type="text" class="form-control" id="registro_id" name="registro" placeholder="Ex: BRXXXXXXXXX" required>
 					  </div>
-					  <div class="form-group">
+					 <div class="form-group">
 					    <label for="descricao">Descrição</label>
-					    <textarea class="form-control" rows="3" id="descricao" placeholder="Insira uma descrição" required></textarea>
-					  </div>
+					    <textarea class="form-control"  name="descricao" form="form_anuncio" required></textarea>
+					</div>
 					  <div class="form-group">
 					    <label for="imagem">Foto</label>
-					    <input type="url" id="imagem">
+					    <input type="url" id="imagem_id" name="imagem">
 					    <p class="help-block">Insira a url da imagem do seu anuncio no imgur aqui!</p>
 					  </div>
 					  <div class="checkbox">
@@ -130,6 +90,14 @@ if($usuario != 0 and $titulo != 0 and $telefone != 0 and $registro != 0 and $des
 					  </div>
 					  <button type="submit" class="btn btn-default">Enviar</button>
 					</form>
+					<!--VERIFICA SE FOI CADASTRADO CORRETAMENTE-->
+					<?php if ($cadastro == 1){ $_SESSION['cadastro'] = 0;?>
+						<span>Cadastrado com sucesso</span>
+					<?php } ?>
+					<!--VERIFICA SE NÃO FOI CADASTRADO CORRETAMENTE-->
+					<?php if ($cadastro == 2){ $_SESSION['cadastro'] = 0;?>
+						<span>Erro ao cadastrar anuncio</span>
+					<?php } ?>
 			</div>
 			<div class="col-md-4"></div>
 

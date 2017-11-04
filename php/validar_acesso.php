@@ -28,6 +28,7 @@
 
 			$_SESSION['usuario'] = $dados_usuario['usuario'];
 			$_SESSION['email'] = $dados_usuario['email'];
+			$_SESSION['id'] = $dados_usuario['id'];
 			header('Location: ../home.php');
 
 		}else{
