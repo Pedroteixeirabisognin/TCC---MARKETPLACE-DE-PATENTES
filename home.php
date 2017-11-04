@@ -147,7 +147,7 @@ $num_paginas = ceil($num_total/$itens_por_pagina);
 							<?php }?>	
 							<?php do{ ?>
 							<div class="panel panel-default">
-								<div class="panel-heading"><?php echo $anuncio['titulo'];?></div>
+								<div class="panel-heading"><a href="php/valida_anuncio.php?id=<?php echo $anuncio['id'];?>"><?php echo $anuncio['titulo'];?></a></div>
 								<div class="panel-body">
 									<?php echo $anuncio['descricao'];?>
 								</div>
