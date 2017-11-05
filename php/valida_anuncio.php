@@ -28,7 +28,7 @@
 		//TESTA SE O $DADOS_USUARIO POSSUI DADOS VÁLIDOS
 		if(isset($dados_usuario['id'])){
 
-			$_SESSION['id'] = $dados_usuario['id'];
+			$_SESSION['id_anuncio'] = $dados_usuario['id'];
 			$_SESSION['id_usuario'] = $dados_usuario['id_usuario'];
 			$_SESSION['titulo'] = $dados_usuario['titulo'];
 			$_SESSION['descricao'] = $dados_usuario['descricao'];

@@ -7,7 +7,7 @@
 
 	}	
 
-	$id = $_SESSION['id'];
+	$id = $_SESSION['id_anuncio'];
 	$id_usuario = $_SESSION['id_usuario'];
 	$titulo = $_SESSION['titulo'];
 	$descricao = $_SESSION['descricao'];

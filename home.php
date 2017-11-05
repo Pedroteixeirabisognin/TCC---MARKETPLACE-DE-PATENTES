@@ -34,7 +34,7 @@ $link = $objDb->conecta_mysql();
 $item = $pagina * $itens_por_pagina;
 
 if ($pesquisa) {
-	$sql = "SELECT * FROM `anuncio_patente` where (`id` LIKE '%pesquisa%') or (`id_usuario` LIKE '%$pesquisa%') or (`titulo` LIKE '%$pesquisa%') or (`descricao` LIKE '%$pesquisa%') or (`telefone` LIKE '%$pesquisa%') or (`email_usuario` LIKE '%$pesquisa%') or (`data_inclusao` LIKE '%$pesquisa%') LIMIT $item, $itens_por_pagina";	
+	$sql = "SELECT * FROM `anuncio_patente` where (`id` LIKE '%pesquisa%') or (`id_usuario` LIKE '%$pesquisa%') or (`titulo` LIKE '%$pesquisa%') or (`descricao` LIKE '%$pesquisa%') or (`telefone` LIKE '%$pesquisa%') or (`registro` LIKE '%$pesquisa%') or (`email_usuario` LIKE '%$pesquisa%') or (`data_inclusao` LIKE '%$pesquisa%') LIMIT $item, $itens_por_pagina";	
 	$num_paginas_def = 1;
 
 
@@ -147,79 +147,101 @@ $num_paginas = ceil($num_total/$itens_por_pagina);
 							<?php }?>	
 							<?php do{ ?>
 							<div class="panel panel-default">
+								
 								<div class="panel-heading"><a href="php/valida_anuncio.php?id=<?php echo $anuncio['id'];?>"><?php echo $anuncio['titulo'];?></a></div>
-								<div class="panel-body">
-									<?php echo $anuncio['descricao'];?>
+								<div class="row">
+									
+									<div class="panel-body">
+
+										<div class="row">
+											<div class="col-lg-4">	
+												
+												<?php if(!is_null($anuncio['imagem'])){ ?>
+												<img src="<?php echo $anuncio['imagem'];?>" width="100px" height="100px" class="img-thumbnail" style="margin-left: 10px; ">
+
+
+												<?php }else{ ?>
+												<img src="imagens/sem_imagem.jpg" width="100px" height="100px" class="img-thumbnail" style="margin-left: 10px; ">
+												<?php  }?>
+
+
+											</div>
+											<div class="col-lg-8">	
+												<?php echo $anuncio['descricao'];?>
+											</div>
+										</div>
+									</div>	
 								</div>
 							</div>
+						</div>
 
 
-							<?php }while($anuncio = $execute->fetch_assoc()); ?>
+						<?php }while($anuncio = $execute->fetch_assoc()); ?>
 
-						</tbody>
+					</tbody>
 
-					</table>
-					<!--AINDA HÁ UM BUG QUE PAGINATION FICA MESMO COM 1 ANUNCIO(corrigido) E QUE QUANDO SELECIONA O SEGUNDO INDICE ELE VIRA UM SELECT ALL-->
-					<!--MAIS UM BUG QUE QUANDO MOSTRA -->
-					
-					<?php if ($num > 9 || $pagina > 0) {
-						
-						?>
-						<nav aria-label="Page navigation">
-							<ul class="pagination">
-								<li>
-									<a href="home.php?pagina=0" aria-label="Previous">
-										<span aria-hidden="true">&laquo;</span>
-									</a>
-								</li>
-								<!--FAZ A PAGINA MUDAR-->
-								<?php for($i=0;$i<$num_paginas;$i++){ ?>
+				</table>
+				<!--AINDA HÁ UM BUG QUE PAGINATION FICA MESMO COM 1 ANUNCIO(corrigido) E QUE QUANDO SELECIONA O SEGUNDO INDICE ELE VIRA UM SELECT ALL-->
+				<!--MAIS UM BUG QUE QUANDO MOSTRA -->
 
-								<!--FAZ O ESTILO DO PAGINATION MUDAR DEPENDENDO DA PAGINA-->
-								<?php $estilo = "";
-								if($pagina == $i){
+				<?php if ($num > 9 || $pagina > 0) {
 
-									$estilo= "class='active'";
+					?>
+					<nav aria-label="Page navigation">
+						<ul class="pagination">
+							<li>
+								<a href="home.php?pagina=0" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+							<!--FAZ A PAGINA MUDAR-->
+							<?php for($i=0;$i<$num_paginas;$i++){ ?>
 
-								}
-								?>
-								<!--ALTERA O ESTILO DO ÍNDICE, CRIA CADA INDICE DO PAGINATION, SE PESQUISA ESTIVER SETADO, MANDA POR GET A PESQUISA E A PAGINA, CASO CONTRÁRIO SÓ A PAGINA -->
-								<li <?php echo $estilo; ?>><a href="home.php?<?php if(isset($pesquisa) and $pesquisa!=0){echo "pagina=".$i."&input_pesquisa=".$pesquisa;}else{ echo "pagina=".$i;}?>"><?php echo $i+1; ?></a></li>
+							<!--FAZ O ESTILO DO PAGINATION MUDAR DEPENDENDO DA PAGINA-->
+							<?php $estilo = "";
+							if($pagina == $i){
 
-								<?php } ?>
-								<li>
-									<a href="home.php?pagina=<?php echo $num_paginas-1;?>" aria-label="Next">
-										<span aria-hidden="true">&raquo;</span>
-									</a>
-								</li>
-							</ul>
-						</nav>
-						<?php } ?>
-					</div>
+								$estilo= "class='active'";
 
+							}
+							?>
+							<!--ALTERA O ESTILO DO ÍNDICE, CRIA CADA INDICE DO PAGINATION, SE PESQUISA ESTIVER SETADO, MANDA POR GET A PESQUISA E A PAGINA, CASO CONTRÁRIO SÓ A PAGINA -->
+							<li <?php echo $estilo; ?>><a href="home.php?<?php if(isset($pesquisa) and $pesquisa!=0){echo "pagina=".$i."&input_pesquisa=".$pesquisa;}else{ echo "pagina=".$i;}?>"><?php echo $i+1; ?></a></li>
 
+							<?php } ?>
+							<li>
+								<a href="home.php?pagina=<?php echo $num_paginas-1;?>" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+					<?php } ?>
 				</div>
 
-
-			</div>
-
-		</div>
-		<div class="col-md-3">
-			<div class="panel panel-default">
-				<div class="panel-body">
-
-					<h4><a href="cadastrar_anuncio.php">Cadastrar Anuncio</a></h4>
-
-				</div>
 
 			</div>
 
 
 		</div>
 
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-default">
+			<div class="panel-body">
+
+				<h4><a href="cadastrar_anuncio.php">Cadastrar Anuncio</a></h4>
+
+			</div>
+
+		</div>
 
 
 	</div>
+
+
+
+</div>
 
 
 </div>

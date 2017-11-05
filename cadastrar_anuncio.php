@@ -9,6 +9,7 @@
 
 	//VARIAVEL PARA VERIFICAR SE O CADASTRO FOI OK
 	$cadastro = intval(isset($_SESSION['cadastro']) ? $_SESSION['cadastro'] : 0) ;
+	//VARIÁVEL PARA VERIFICAR SE A URL ESTÁ CERTA
 	$valida_url = intval(isset($_SESSION['valida_url']) ? $_SESSION['valida_url'] : 0) ;
 ?>
 
@@ -60,7 +61,7 @@
 	    	<div class="col-md-4">
 	    		<h3>Anuncie sua idéia</h3>
 	    		<br />
-
+	    		<?php  echo $_SESSION['id']; ?>
 	    		<!--FORM PARA CADASTRO DO ANUNCIO-->
 					<form action="php/cadastrar_anuncio.php" id="form_anuncio" method="POST">
 					  <div class="form-group">
