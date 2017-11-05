@@ -9,6 +9,7 @@
 
 	//VARIAVEL PARA VERIFICAR SE O CADASTRO FOI OK
 	$cadastro = intval(isset($_SESSION['cadastro']) ? $_SESSION['cadastro'] : 0) ;
+	$valida_url = intval(isset($_SESSION['valida_url']) ? $_SESSION['valida_url'] : 0) ;
 ?>
 
 
@@ -79,9 +80,12 @@
 					    <textarea class="form-control"  name="descricao" form="form_anuncio" required></textarea>
 					</div>
 					  <div class="form-group">
+					 	<p class="help-block">Hospede a imagem no Imgur, clique com o lado direito em cima da imagem, selecione copiar endereço de imagem e insira a url copiada aqui no campo <b>Foto</b> se possuir alguma.</p>
 					    <label for="imagem">Foto</label>
 					    <input type="url" id="imagem_id" name="imagem">
-					    <p class="help-block">Insira a url da imagem do seu anuncio no imgur aqui!</p>
+					<?php if ($valida_url == 1){ $_SESSION['valida_url'] = 0;?>
+						<span>Url de imagem inválida</span>
+					<?php } ?>
 					  </div>
 					  <div class="checkbox">
 					    <label>

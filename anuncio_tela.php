@@ -69,23 +69,36 @@
 
 
 
+			<?php if(!is_null($imagem)){ ?>
+			<img src="<?php echo $imagem;?>" alt="Imagem" class="img-thumbnail" width="500px" height="500px">
 
+
+			<?php }else{ ?>
+			<img src="imagens/sem_imagem.jpg" alt="Imagem" class="img-thumbnail" width="500px" height="500px">
+			<?php  }?>
+			<br>
+			<br>
 	    	Numero do anúncio: <?php echo $id;?>
+			<br>
 			<br>
 			Id do usuário: <?php echo $id_usuario;?>
 			<br>
+			<br>
 			Título: <?php echo $titulo;?>
+			<br>
 			<br>
 			Descrição: <?php echo $descricao;?>
 			<br>
-			Telefone: <?php echo $telefone;?>
+			<br>
+			Telefone para contato: <?php echo $telefone;?>
+			<br>
 			<br>
 			Registro: <?php echo $registro;?>
 			<br>
+			<br>
 			Data da postagem: <?php echo $data_inclusao;?>
 			<br>
-			<img src="<?php echo $imagem;?>">
-			
+			<br>
 			</div>
 			<div class="col-md-4"></div>
 
@@ -103,4 +116,5 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	
 	</body>
+
 </html>
