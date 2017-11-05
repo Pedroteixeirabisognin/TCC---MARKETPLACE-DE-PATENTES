@@ -74,7 +74,7 @@
 
 
 			<?php }else{ ?>
-			<img src="imagens/sem_imagem.jpg" alt="Imagem" class="img-thumbnail" width="500px" height="500px">
+			<img src="imagens/icone_invector.png" alt="Imagem" class="img-thumbnail" width="500px" height="500px"/>
 			<?php  }?>
 			<br>
 			<br>

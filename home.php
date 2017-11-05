@@ -34,7 +34,7 @@ $link = $objDb->conecta_mysql();
 $item = $pagina * $itens_por_pagina;
 
 if ($pesquisa) {
-	$sql = "SELECT * FROM `anuncio_patente` where (`id` LIKE '%pesquisa%') or (`id_usuario` LIKE '%$pesquisa%') or (`titulo` LIKE '%$pesquisa%') or (`descricao` LIKE '%$pesquisa%') or (`telefone` LIKE '%$pesquisa%') or (`registro` LIKE '%$pesquisa%') or (`email_usuario` LIKE '%$pesquisa%') or (`data_inclusao` LIKE '%$pesquisa%') LIMIT $item, $itens_por_pagina";	
+	$sql = "SELECT * FROM `anuncio_patente` where (`id` LIKE '%pesquisa%') or (`id_usuario` LIKE '%$pesquisa%') or (`titulo` LIKE '%$pesquisa%') or (`descricao` LIKE '%$pesquisa%') or (`telefone` LIKE '%$pesquisa%') or (`registro` LIKE '%$pesquisa%') or (`data_inclusao` LIKE '%$pesquisa%') LIMIT $item, $itens_por_pagina";	
 	$num_paginas_def = 1;
 
 
@@ -43,16 +43,16 @@ else{
 	$sql = "SELECT * FROM `anuncio_patente` LIMIT $item, $itens_por_pagina";
 	$num_paginas_def = 0;
 }
-
+//var_dump($sql);
 $execute = mysqli_query($link,$sql);
 $anuncio = $execute->fetch_assoc();
 $num = $execute->num_rows;
 
-
+//var_dump($anuncio);
 
 //PEGA A QUANTIDADE MAXIMA DE VALORES DO BANCO DE DADOS DEFININDO O TIPO DE QUERY
 if ($num_paginas_def == 1) {
-	$num_total = $link->query("SELECT * FROM `anuncio_patente` where (`id` LIKE '%pesquisa%') or (`id_usuario` LIKE '%$pesquisa%') or (`titulo` LIKE '%$pesquisa%') or (`descricao` LIKE '%$pesquisa%') or (`telefone` LIKE '%$pesquisa%') or (`email_usuario` LIKE '%$pesquisa%') or (`data_inclusao` LIKE '%$pesquisa%')")->num_rows;
+	$num_total = $link->query("SELECT * FROM `anuncio_patente` where (`id` LIKE '%pesquisa%') or (`id_usuario` LIKE '%$pesquisa%') or (`titulo` LIKE '%$pesquisa%') or (`descricao` LIKE '%$pesquisa%') or (`telefone` LIKE '%$pesquisa%') or (`data_inclusao` LIKE '%$pesquisa%')")->num_rows;
 }
 else{
 	$num_total = $link->query("SELECT * FROM `anuncio_patente`")->num_rows;
@@ -156,7 +156,7 @@ $num_paginas = ceil($num_total/$itens_por_pagina);
 										<div class="row">
 											<div class="col-lg-4">	
 												
-												<?php if(!is_null($anuncio['imagem'])){ ?>
+												<?php if(!is_null($anuncio['imagem']) or $anuncio['imagem'] == ''){ ?>
 												<img src="<?php echo $anuncio['imagem'];?>" width="100px" height="100px" class="img-thumbnail" style="margin-left: 10px; ">
 
 
