@@ -27,20 +27,16 @@
 
 
 
-	//INSERINDO O USUARIO LOGADO ALI EMBAIXO IMPEDE QUE ACESSEM ESSA URL E APAGUEM O ARQUIVO POR CONTRA PRÓPRIA
+	//INSERINDO O USUARIO LOGADO ALI EMBAIXO IMPEDE QUE ACESSEM ESSA URL E APAGUEM O ARQUIVO POR CONTRA
 	$sql = "DELETE FROM `anuncio_patente` WHERE id = '$id' and id_usuario = '$id_usuario' ";
 
 	echo $sql;
 	//EXECUTAR A QUERY (NOTA: A FUNÇÃO MYSQLI_QUERY QUANDO DA ERRO RETORNA VALOR FALSE)
 	if(mysqli_query($link,$sql)){
 
-		echo "Tudo certo!";    
+		header('Location: ../home.php'); 
 
-	 }else{
-
-	 	echo "ERRO";
-
-	}
+	 }
 //}
 
 

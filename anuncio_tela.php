@@ -103,7 +103,7 @@
 			<?php if ($id_usuario == $_SESSION['id']) { ?>
 			
 			<form method="get">
-				<button  type="submit" class="btn btn-warning" formaction="php/deleta_anuncio.php?id=<?php echo $id;?>" name="id" >Alterar Anuncio</button>
+				<button  type="submit" class="btn btn-warning" formaction="alterar_anuncio.php?id=" name="id" value="<?php echo $id;?>" >Alterar Anuncio</button>
 	    		<button type="submit" class="btn btn-danger" formaction="php/deleta_anuncio.php?id=" name="id" value="<?php echo $id;?>" >Apagar anuncio</button>
 			</form>
 			<?php }?>	    	
