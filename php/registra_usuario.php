@@ -83,8 +83,9 @@
 
 	 //EXECUTAR A QUERY (NOTA: A FUNÇÃO MYSQLI_QUERY QUANDO DA ERRO RETORNA VALOR FALSE)
 	 if(mysqli_query($link,$sql)){
-
-	 	echo "Usuário registrado com sucesso!";
+		
+		
+		header('Location: ../inscrevase.php?sucesso=1');
 
 	 }else{
 

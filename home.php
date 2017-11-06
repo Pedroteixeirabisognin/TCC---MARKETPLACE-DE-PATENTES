@@ -207,7 +207,7 @@ $num_paginas = ceil($num_total/$itens_por_pagina);
 
 							}
 							?>
-							<!--ALTERA O ESTILO DO ÍNDICE, CRIA CADA INDICE DO PAGINATION, SE PESQUISA ESTIVER SETADO, MANDA POR GET A PESQUISA E A PAGINA, CASO CONTRÁRIO SÓ A PAGINA -->
+							<!--ALTERA O ESTILO DO ÍNDICE, CRIA CADA INDICE DO PAGINATION, SE PESQUISA ESTIVER SETADO, MANDA POR GET A PESQUISA E A PAGINA, CASO CONTRÁRIO SÓ A PAGINA // BUG, SE NO IF DE PESQUISA FOR COLOCADO A STRING 0 ELE VAI RECONHECER COMO FALSO E NÃO VAI FAZER AQUILO-->
 							<li <?php echo $estilo; ?>><a href="home.php?<?php if($pesquisa!= false){echo "pagina=".$i."&input_pesquisa=".$pesquisa;}else{ echo "pagina=".$i;}?>"><?php echo $i+1; ?></a></li>
 
 							<?php } ?>

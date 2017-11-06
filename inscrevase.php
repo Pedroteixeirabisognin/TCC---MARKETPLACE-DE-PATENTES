@@ -2,6 +2,7 @@
 	//ISSET VERIFICA SE EXISTE ALGO DENTRO DA VARIÁVEL
 	$erro_usuario = isset($_GET['erro_usuario'])? $_GET['erro_usuario'] : 0;
 	$erro_email	=  isset($_GET['erro_email'])? $_GET['erro_email'] : 0;
+	$sucesso = isset($_GET['sucesso'])? $_GET['sucesso'] : 0;
 ?>
 
 
@@ -87,6 +88,13 @@
 					
 					<button type="submit" class="btn btn-primary form-control">Inscreva-se</button>
 				</form>
+				<?php if ($sucesso) {
+					echo "<font style='color: green'>Usuário cadastrado com sucesso!</font>";
+				}
+
+
+
+				?>	
 			</div>
 			<div class="col-md-4"></div>
 

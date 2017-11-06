@@ -85,7 +85,7 @@
 					    <label for="imagem">Foto</label>
 					    <input type="url" id="imagem_id" name="imagem">
 					<?php if ($valida_url == 1){ $_SESSION['valida_url'] = 0;?>
-						<span>Url de imagem inválida</span>
+						<span><font style='color: #FF0000'>Url de imagem inválida</font></span>
 					<?php } ?>
 					  </div>
 					  <div class="checkbox">
@@ -97,11 +97,11 @@
 					</form>
 					<!--VERIFICA SE FOI CADASTRADO CORRETAMENTE-->
 					<?php if ($cadastro == 1){ $_SESSION['cadastro'] = 0;?>
-						<span>Cadastrado com sucesso</span>
+						<span><font style='color: #FF0000'>Cadastrado com sucesso</font></span>
 					<?php } ?>
 					<!--VERIFICA SE NÃO FOI CADASTRADO CORRETAMENTE-->
 					<?php if ($cadastro == 2){ $_SESSION['cadastro'] = 0;?>
-						<span>Erro ao cadastrar anuncio</span>
+						<span><font style='color: #FF0000'>Erro ao cadastrar anuncio</font></span>
 					<?php } ?>
 			</div>
 			<div class="col-md-4"></div>
