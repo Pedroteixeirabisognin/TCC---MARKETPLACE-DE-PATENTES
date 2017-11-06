@@ -16,6 +16,7 @@ else{
 //CHAMA A CLASSE BD.CLASS
 require_once('php/db.class.php');
 
+
 //DEFINE O NUMERO DE ITENS POR PÁGINA
 $itens_por_pagina = 10; 
 
@@ -33,8 +34,9 @@ $link = $objDb->conecta_mysql();
 //FAZ A PESQUISA CORRETAMENTE
 $item = $pagina * $itens_por_pagina;
 
+//VERIFICA SE PESQUISA POSSUI ALGO DENTRO E MUDA A QUERY DEPENDENDO DO QUE FOR
 if ($pesquisa) {
-	$sql = "SELECT * FROM `anuncio_patente` where (`id` LIKE '%pesquisa%') or (`id_usuario` LIKE '%$pesquisa%') or (`titulo` LIKE '%$pesquisa%') or (`descricao` LIKE '%$pesquisa%') or (`telefone` LIKE '%$pesquisa%') or (`registro` LIKE '%$pesquisa%') or (`data_inclusao` LIKE '%$pesquisa%') LIMIT $item, $itens_por_pagina";	
+	$sql = "SELECT * FROM `anuncio_patente` where (`id` LIKE '%$pesquisa%') or (`id_usuario` LIKE '%$pesquisa%') or (`titulo` LIKE '%$pesquisa%') or (`descricao` LIKE '%$pesquisa%') or (`telefone` LIKE '%$pesquisa%') or (`registro` LIKE '%$pesquisa%') or (`data_inclusao` LIKE '%$pesquisa%') LIMIT $item, $itens_por_pagina";	
 	$num_paginas_def = 1;
 
 
@@ -52,7 +54,7 @@ $num = $execute->num_rows;
 
 //PEGA A QUANTIDADE MAXIMA DE VALORES DO BANCO DE DADOS DEFININDO O TIPO DE QUERY
 if ($num_paginas_def == 1) {
-	$num_total = $link->query("SELECT * FROM `anuncio_patente` where (`id` LIKE '%pesquisa%') or (`id_usuario` LIKE '%$pesquisa%') or (`titulo` LIKE '%$pesquisa%') or (`descricao` LIKE '%$pesquisa%') or (`telefone` LIKE '%$pesquisa%') or (`data_inclusao` LIKE '%$pesquisa%')")->num_rows;
+	$num_total = $link->query("SELECT * FROM `anuncio_patente` where (`id` LIKE '%$pesquisa%') or (`id_usuario` LIKE '%$pesquisa%') or (`titulo` LIKE '%$pesquisa%') or (`descricao` LIKE '%$pesquisa%') or (`telefone` LIKE '%$pesquisa%') or (`data_inclusao` LIKE '%$pesquisa%')")->num_rows;
 }
 else{
 	$num_total = $link->query("SELECT * FROM `anuncio_patente`")->num_rows;
@@ -206,7 +208,7 @@ $num_paginas = ceil($num_total/$itens_por_pagina);
 							}
 							?>
 							<!--ALTERA O ESTILO DO ÍNDICE, CRIA CADA INDICE DO PAGINATION, SE PESQUISA ESTIVER SETADO, MANDA POR GET A PESQUISA E A PAGINA, CASO CONTRÁRIO SÓ A PAGINA -->
-							<li <?php echo $estilo; ?>><a href="home.php?<?php if(isset($pesquisa) and $pesquisa!=0){echo "pagina=".$i."&input_pesquisa=".$pesquisa;}else{ echo "pagina=".$i;}?>"><?php echo $i+1; ?></a></li>
+							<li <?php echo $estilo; ?>><a href="home.php?<?php if($pesquisa!= false){echo "pagina=".$i."&input_pesquisa=".$pesquisa;}else{ echo "pagina=".$i;}?>"><?php echo $i+1; ?></a></li>
 
 							<?php } ?>
 							<li>
