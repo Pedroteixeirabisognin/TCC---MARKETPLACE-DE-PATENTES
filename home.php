@@ -118,14 +118,14 @@ $num_paginas = ceil($num_total/$itens_por_pagina);
 			</div>	
 		</div>
 		<div class="col-md-6">
-			<form action="home.php">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<div class="input-group">
+			<form action="home.php" style="padding-right: 4px;">
+				<div class="panel panel-default" >
+					<div class="panel-body" >
+						<div class="input-group" >
 
 
 							<!--MODIFICANDO PARA PESQUISAR ANUNCIOS EM PESQUISA_ANUNCIO.PHP, COLOQUEI NOME INPUT_PESQUISA-->
-							<input type="text" class="form-control" id="text_pesquisa" placeholder="Pesquise" maxlength="140" name="input_pesquisa">
+							<input type="text" class="form-control" id="text_pesquisa" placeholder="Pesquise" maxlength="140" name="input_pesquisa" >
 							<span class="input-group-btn">
 
 								<button class="btn btn-default" id="btn_pesquisa" type="submit" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -139,9 +139,9 @@ $num_paginas = ceil($num_total/$itens_por_pagina);
 			</form>
 
 			<!--EM TESTE-->
-			<div class="container fluid">
+			
 				<div class="row">
-					<div class="col-lg-4">
+					<div class="col-ls-4" style="padding-left: 10px; padding-right: 10px;">
 
 
 						<?php if($num > 0 ){?>
@@ -153,13 +153,13 @@ $num_paginas = ceil($num_total/$itens_por_pagina);
 								<div class="panel-heading"><a href="php/valida_anuncio.php?id=<?php echo $anuncio['id'];?>"><?php echo $anuncio['titulo'];?></a></div>
 								<div class="row">
 									
-									<div class="panel-body">
+									<div class="panel-body" style=" height: 200px;">
 
 										<div class="row">
 											<div class="col-lg-4">	
 												
 												<?php if(!is_null($anuncio['imagem']) or $anuncio['imagem'] == ''){ ?>
-												<img src="<?php echo $anuncio['imagem'];?>" width="100px" height="100px" class="img-thumbnail" style="margin-left: 10px; ">
+												<img src="<?php echo $anuncio['imagem'];?>" class="img-thumbnail" style="margin-left: 10px; width: 100px; height: 100px;">
 
 
 												<?php }else{ ?>
@@ -189,7 +189,7 @@ $num_paginas = ceil($num_total/$itens_por_pagina);
 				<?php if ($num > 9 || $pagina > 0) {
 
 					?>
-					<nav aria-label="Page navigation">
+					<nav aria-label="Page navigation" style="text-align: center;">
 						<ul class="pagination">
 							<li>
 								<a href="home.php?pagina=0" aria-label="Previous">
@@ -222,7 +222,7 @@ $num_paginas = ceil($num_total/$itens_por_pagina);
 				</div>
 
 
-			</div>
+			
 
 
 		</div>
