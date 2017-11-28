@@ -23,8 +23,15 @@ $nome = isset( $_POST['nome'])? $_POST['nome'] : 'NULL';
 $sexo = isset( $_POST['sexo'])? $_POST['sexo'] : 'NULL'; 
 $nasc = isset( $_POST['nasc'])? $_POST['nasc'] : 'NULL'; 
 $foto = isset( $_POST['foto'])? $_POST['foto'] : 'NULL'; 
+try {
+	$data = new DateTime($nasc);
 
-
+} catch (Exception $e) {
+	header('Location: ../editar_cliente.php?sucesso=3');
+	die();
+	
+}
+$nasc = strval($data->format('d/m/Y H:i:s'));
 
 $objDb = new db();
 

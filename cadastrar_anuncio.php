@@ -64,7 +64,7 @@ $valida_url = intval(isset($_SESSION['valida_url']) ? $_SESSION['valida_url'] : 
 
 			<script type="text/javascript">
 			$(document).ready( function() {
-			
+				$('[data-toggle="tooltip"]').tooltip(); 
 				// initialize with defaults
 				$("#arquivos").fileinput();
 
@@ -119,8 +119,8 @@ $valida_url = intval(isset($_SESSION['valida_url']) ? $_SESSION['valida_url'] : 
 					<input type="tel" pattern="^\d{2} \d{5} \d{4}$" class="form-control" name="telefone" id="telefone_id" placeholder="Ex: xx xxxxx xxxx" required>
 				</div>
 				<div class="form-group">
-					<label for="registro">Numero do registro</label>
-					<input type="text" class="form-control" id="registro_id" name="registro" placeholder="Ex: BRXXXXXXXXX" required>
+					<label for="registro">Numero do registro</label> <a href="#" data-toggle="tooltip" data-placement="right" title="É o seu código de registro no inpi ex: BR 11 2012 012852 3"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
+					<input type="text" class="form-control" id="registro_id" name="registro" placeholder="Codigo de registro" required>
 				</div>
 				<div class="form-group">
 					<label for="descricao">Descrição</label>

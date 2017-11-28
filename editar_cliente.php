@@ -114,7 +114,7 @@ $sucesso = isset($_GET['sucesso']) ? $_GET['sucesso'] : 0 ;
 				</div>
 
 			  <label for="nasc">Data de nascimento</label>
-			  <input type="data" class="form-control" id="nasc" name="nasc" placeholder="Data de Nascimento">
+			  <input type="data" class="form-control" id="nasc" name="nasc" placeholder="xx/xx/xxxx">
 			  <label for="sexo">Sexo</label>
 			  <br>
 			  <input type="RADIO" id="sexo" name="sexo" value="f"> Feminino</input> 
@@ -130,6 +130,9 @@ $sucesso = isset($_GET['sucesso']) ? $_GET['sucesso'] : 0 ;
 
 			<?php }if($sucesso == 2){?>
 				<p style="color: red;">Falha ao adicionar dados!</p>
+
+			<?php }if($sucesso == 3){?>
+				<p style="color: red;">Data invalida!</p>
 			<?php }?>
 		</div>
 		<div class="col-md-4"></div>

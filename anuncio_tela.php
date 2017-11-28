@@ -31,11 +31,16 @@
 
 	$sql = "select nome from area WHERE id = '$id_area' ";
 
+//SELECIONA O NOME DO USUÁRIO
+	$sql2 = "select usuario from conta WHERE id = '$id_usuario' ";
 
 	$sql_resposta = mysqli_query($link,$sql);
 	
 	$dados_usuario = mysqli_fetch_array($sql_resposta);
 
+	$sql_resposta = mysqli_query($link,$sql2);
+	
+	$dados_conta = mysqli_fetch_array($sql_resposta);
 	?>
 
 
@@ -82,44 +87,54 @@
 			
 			<br /><br />
 
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
+
+			<div class="col-md-12">
 				
+				<div class="panel panel-primary">
+				  <div class="panel-heading">
+				    <h1 class="panel-title"><h1 align="center"><?php echo $titulo;?></h1></h1>
+				  </div>
+				  <div class="panel-body">
+					<br>
+
+					<?php if(!is_null($imagem)){ ?>
+					<img src="php/<?php echo $imagem;?>" alt="Imagem" class="img-thumbnail" width="1100px" height="500px">
 
 
+					<?php }else{ ?>
+					<img src="imagens/sem_imagem.png" alt="Imagem" class="img-thumbnail" width="1100px" height="500px"/>
+					<?php  }?>
+					<br>
+					<br>
+					<b>Id:</b> <?php echo $id;?>
+					<br>
+					<div style="padding-top: 20px;"> 
+					 	<div class="panel panel-default" >
+						  <div class="panel-heading">Descrição:</div>
+						  <div class="panel-body">
+						    <?php echo $descricao;?>
+						  </div>
+						</div>
+					</div>
 
-				<?php if(!is_null($imagem)){ ?>
-				<img src="php/<?php echo $imagem;?>" alt="Imagem" class="img-thumbnail" width="500px" height="500px">
-
-
-				<?php }else{ ?>
-				<img src="imagens/sem_imagem.png" alt="Imagem" class="img-thumbnail" width="500px" height="500px"/>
-				<?php  }?>
+				 	<br>
+				 	<br>
+				<b>Área:</b> <?php echo $dados_usuario['nome'];?>
 				<br>
 				<br>
-				Numero do anúncio: <?php echo $id;?>
+				<b>Registrante:</b> <?php echo strtoupper($dados_conta['usuario']);?>
 				<br>
 				<br>
-				Id do usuário: <?php echo $id_usuario;?>
+				<b>Telefone para contato:</b> <?php echo $telefone;?>
 				<br>
 				<br>
-				<!--MUDAR DEPOIS PARA NOME DA ÁREA-->
-				Área: <?php echo $dados_usuario['nome'];?>
+				<b>Registro:</b> <?php echo $registro;?>
 				<br>
 				<br>
-				Título: <?php echo $titulo;?>
-				<br>
-				<br>
-				Descrição: <?php echo $descricao;?>
-				<br>
-				<br>
-				Telefone para contato: <?php echo $telefone;?>
-				<br>
-				<br>
-				Registro: <?php echo $registro;?>
-				<br>
-				<br>
-				Data da postagem: <?php echo $data_inclusao;?>
+				<b>Data e hora da postagem:</b><?php $date = new DateTime($data_inclusao);
+				echo ' '.$date->format('d/m/Y H:i:s')
+				?>
+			
 				<br>
 				<br>
 
@@ -129,13 +144,18 @@
 					<button  type="submit" class="btn btn-warning" formaction="alterar_anuncio.php?id=" name="id" value="<?php echo $id;?>" >Alterar Anuncio</button>
 					<button type="submit" class="btn btn-danger" formaction="php/deleta_anuncio.php?id=" name="id" value="<?php echo $id;?>" >Apagar anuncio</button>
 				</form>
-				<?php }?>	    	
+				<?php }?>	  
+				  </div>
+				</div>
+
+
+  	
 
 			</div>
 
 
 
-			<div class="col-md-4"></div>
+
 
 			<div class="clearfix"></div>
 			<br />
